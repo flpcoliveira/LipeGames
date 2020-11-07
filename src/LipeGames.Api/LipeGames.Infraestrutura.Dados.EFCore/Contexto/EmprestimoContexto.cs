@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Configuration;
+using LipeGames.Dominio.Entidades;
 
 namespace LipeGames.Infraestrutura.Dados.EFCore.Contexto
 {
@@ -19,5 +20,13 @@ namespace LipeGames.Infraestrutura.Dados.EFCore.Contexto
         {
             base.OnConfiguring(optionsBuilder);
         }
+
+        public DbSet<Usuario> Usuarios { get; set; }
+
+        public DbSet<Amigo> Amigos { get; set; }
+
+        public DbSet<Jogo> Jogos { get; set; }
+
+        public DbSet<Emprestimo> Emprestimos { get; set; }
     }
 }
