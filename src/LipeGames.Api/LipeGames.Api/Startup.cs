@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LipeGames.Api.Configuracao;
 using LipeGames.Infraestrutura.Dados.EFCore.Contexto;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,10 +30,7 @@ namespace LipeGames.Api
         {
             services.AddControllers();
 
-            services.AddDbContext<EmprestimoContexto>(options =>
-            {
-                options.UseSqlServer(Configuration.GetConnectionString("EmprestimoContexto"));
-            });
+            ServicosAplicacao.Configurar(services, Configuration);            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

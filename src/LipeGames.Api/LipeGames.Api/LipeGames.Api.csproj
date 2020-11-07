@@ -19,7 +19,6 @@
   <ItemGroup>
     <ProjectReference Include="..\LipeGames.Dominio\LipeGames.Dominio.csproj" />
     <ProjectReference Include="..\LipeGames.Infraestrutura.Dados.EFCore\LipeGames.Infraestrutura.Dados.EFCore.csproj" />
-    <ProjectReference Include="..\LipeGames.Servico\LipeGames.Servico.csproj" />
   </ItemGroup>
 
 
