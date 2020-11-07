@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace LipeGames.Dominio.Interfaces
 {
-    public interface IUnitOfWork
+    public interface IUnidadeDeTrabalho
     {
-        void Commit();
+        Task<bool> Commit();
 
-        void Rollback();
+        Task Rollback();
     }
 }
