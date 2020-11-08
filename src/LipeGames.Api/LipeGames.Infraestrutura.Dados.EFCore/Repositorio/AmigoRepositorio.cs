@@ -1,7 +1,7 @@
 ﻿using LipeGames.Dominio.Entidades;
 using LipeGames.Dominio.Interfaces.Repositorios;
 using LipeGames.Infraestrutura.Dados.EFCore.Contexto;
-using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,7 +11,7 @@ namespace LipeGames.Infraestrutura.Dados.EFCore.Repositorio
     {
         private readonly EmprestimoContexto _contexto;
 
-        public AmigoRepositorio (EmprestimoContexto contexto)
+        public AmigoRepositorio(EmprestimoContexto contexto)
         {
             _contexto = contexto;
         }
@@ -28,19 +28,19 @@ namespace LipeGames.Infraestrutura.Dados.EFCore.Repositorio
             return amigo;
         }
 
-        public Task<Amigo> Detalhar(int id)
+        public async Task<Amigo> Detalhar(int id)
         {
-            throw new NotImplementedException();
+            return await _contexto.Amigos.FindAsync(id);
         }
 
-        public Task<int> Excluir(int id)
+        public void Excluir(Amigo amigo)
         {
-            throw new NotImplementedException();
+            _contexto.Remove(amigo);
         }
 
-        public Task<IEnumerable<Amigo>> Listar()
+        public async Task<IEnumerable<Amigo>> Listar()
         {
-            throw new NotImplementedException();
+            return await _contexto.Amigos.AsNoTracking().ToListAsync();
         }
     }
 }

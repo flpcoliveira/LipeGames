@@ -14,6 +14,6 @@ namespace LipeGames.Dominio.Interfaces.Servicos
 
         public Task<AmigoDto> Detalhar(int id);
 
-        public Task<int> Excluir(int id);
+        public Task Excluir(int id);
     }
 }

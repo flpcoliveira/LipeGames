@@ -31,6 +31,8 @@ namespace LipeGames.Dominio.Servicos
             _mapper.Map(amigo, entidade);
 
             entidade = _repositorio.Alterar(entidade);
+            await _unidadeTrabalho.Commit();
+
             amigo = _mapper.Map(entidade, amigo);
             return amigo;
         }
@@ -40,8 +42,9 @@ namespace LipeGames.Dominio.Servicos
             var entidade = _mapper.Map<Amigo>(amigo);            
 
             entidade = await _repositorio.Criar(entidade);
-            amigo = _mapper.Map(entidade, amigo);
-            return amigo;
+            await _unidadeTrabalho.Commit();
+
+            return _mapper.Map(entidade, amigo);
         }
 
         public async Task<AmigoDto> Detalhar(int id)
@@ -52,15 +55,24 @@ namespace LipeGames.Dominio.Servicos
             return _mapper.Map<AmigoDto>(entidade);
         }
 
-        public async Task<int> Excluir(int id)
+        public async Task Excluir(int id)
         {
-            return await _repositorio.Excluir(id);
+            var jogo = await RecuperarEntidadePorId(id);
+             _repositorio.Excluir(jogo);
+            await _unidadeTrabalho.Commit();
         }
 
         public async Task<IEnumerable<AmigoDto>> Listar()
         {
             var listaAmigos = await _repositorio.Listar();
             return _mapper.Map <IEnumerable<Amigo>, IEnumerable<AmigoDto>>(listaAmigos);
+        }
+
+        private async Task<Amigo> RecuperarEntidadePorId(int id)
+        {
+            var entidade = await _repositorio.Detalhar(id);
+            if (entidade == null) throw new EntidadeNaoEncotradaException($"Amigo com código {id} não encontrado");
+            return entidade;
         }
     }
 }

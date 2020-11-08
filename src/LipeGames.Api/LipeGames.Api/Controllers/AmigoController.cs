@@ -44,8 +44,8 @@ namespace LipeGames.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Excluir(int id)
         {
-            var resultado = await _servico.Excluir(id);
-            return Ok(resultado);
+            await _servico.Excluir(id);
+            return Ok();
         }
 
 
