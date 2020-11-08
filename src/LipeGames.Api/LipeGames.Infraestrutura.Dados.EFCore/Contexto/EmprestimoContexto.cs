@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Configuration;
 using LipeGames.Dominio.Entidades;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace LipeGames.Infraestrutura.Dados.EFCore.Contexto
 {
-    public class EmprestimoContexto: DbContext
+    public class EmprestimoContexto: IdentityDbContext
     {
 
         public EmprestimoContexto(DbContextOptions<EmprestimoContexto> options): base(options)
