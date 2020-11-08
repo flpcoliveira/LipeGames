@@ -37,7 +37,11 @@ namespace LipeGames.Api.Configuration
 
             services.AddScoped<IAmigoRepositorio, AmigoRepositorio>();
 
-            services.AddScoped<IAmigoServico, AmigoServico>();            
+            services.AddScoped<IAmigoServico, AmigoServico>();
+
+            services.AddScoped<IJogoRepositorio, JogoRepositorio>();
+
+            services.AddScoped<IJogoServico, JogoServico>();
 
             return services;
         }
