@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LipeGames.Api", "LipeGames.Api\LipeGames.Api.csproj", "{55A6FC58-E315-401D-B585-C689EDE73797}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Aplicacao", "Aplicacao", "{C10CDE77-57D4-4979-9131-E52DA78F8288}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{C10CDE77-57D4-4979-9131-E52DA78F8288}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dominio", "Dominio", "{837FEF48-22B0-432E-B919-1A26ABBBCFA6}"
 EndProject
