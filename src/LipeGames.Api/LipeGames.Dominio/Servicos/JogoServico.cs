@@ -25,8 +25,7 @@ namespace LipeGames.Dominio.Servicos
 
         public async Task<JogoDto> Alterar(int id, JogoDto amigo)
         {
-            var entidade = await _repositorio.Detalhar(id);
-            if (entidade == null) throw new EntidadeNaoEncotradaException($"Amigo com código {id} não encontrado");
+            var entidade = await RecuperarEntidadePorId(id);
 
             _mapper.Map(amigo, entidade);
 
