@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LipeGames.Infraestrutura.Dados.EFCore.Migrations
 {
     [DbContext(typeof(EmprestimoContexto))]
-    [Migration("20201107133504_EmprestimoAdicionaDatas")]
-    partial class EmprestimoAdicionaDatas
+    [Migration("20201107220327_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,7 +23,7 @@ namespace LipeGames.Infraestrutura.Dados.EFCore.Migrations
 
             modelBuilder.Entity("LipeGames.Dominio.Entidades.Amigo", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -38,7 +38,7 @@ namespace LipeGames.Infraestrutura.Dados.EFCore.Migrations
 
             modelBuilder.Entity("LipeGames.Dominio.Entidades.Emprestimo", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -66,7 +66,7 @@ namespace LipeGames.Infraestrutura.Dados.EFCore.Migrations
 
             modelBuilder.Entity("LipeGames.Dominio.Entidades.Jogo", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -84,7 +84,7 @@ namespace LipeGames.Infraestrutura.Dados.EFCore.Migrations
 
             modelBuilder.Entity("LipeGames.Dominio.Entidades.Usuario", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LipeGames.Infraestrutura.Dados.EFCore.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -55,7 +55,9 @@ namespace LipeGames.Infraestrutura.Dados.EFCore.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AmigoId = table.Column<int>(nullable: false),
-                    JogoId = table.Column<int>(nullable: false)
+                    JogoId = table.Column<int>(nullable: false),
+                    DataEmprestimo = table.Column<DateTime>(nullable: false),
+                    DataDevolucao = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {

@@ -5,8 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20201107214157_ChangeKeyIdentity.cs" />
+    <Compile Remove="Migrations\20201107214157_ChangeKeyIdentity.Designer.cs" />
+    <Compile Remove="Migrations\20201107215411_Initialize.cs" />
+    <Compile Remove="Migrations\20201107215411_Initialize.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Mapeamento\" />
-    <Folder Include="Repositorio\" />
   </ItemGroup>
 
   <ItemGroup>

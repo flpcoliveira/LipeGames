@@ -21,7 +21,7 @@ namespace LipeGames.Infraestrutura.Dados.EFCore.Migrations
 
             modelBuilder.Entity("LipeGames.Dominio.Entidades.Amigo", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -36,7 +36,7 @@ namespace LipeGames.Infraestrutura.Dados.EFCore.Migrations
 
             modelBuilder.Entity("LipeGames.Dominio.Entidades.Emprestimo", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -64,7 +64,7 @@ namespace LipeGames.Infraestrutura.Dados.EFCore.Migrations
 
             modelBuilder.Entity("LipeGames.Dominio.Entidades.Jogo", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -82,7 +82,7 @@ namespace LipeGames.Infraestrutura.Dados.EFCore.Migrations
 
             modelBuilder.Entity("LipeGames.Dominio.Entidades.Usuario", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
