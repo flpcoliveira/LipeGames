@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using LipeGames.Api.AutoMapper;
+using LipeGames.Dominio.Entidades;
+using LipeGames.Dominio.Entidades.Validadores;
 using LipeGames.Dominio.Interfaces.Repositorios;
 using LipeGames.Dominio.Interfaces.Servicos;
 using LipeGames.Dominio.Interfaces.UnidadeTrabalho;
@@ -11,6 +14,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
+using System;
 
 namespace LipeGames.Api.Configuration
 {
@@ -38,7 +43,43 @@ namespace LipeGames.Api.Configuration
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
 
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(c =>
+            {
+
+                c.SwaggerDoc("v1", new OpenApiInfo()
+                {
+                    Title = "API",
+                    Description = "API",
+                    Contact = new OpenApiContact() { Name = "Felipe Cristo", Email = "felipe.cristo@gmail.com" },
+                    License = new OpenApiLicense() { Name = "MIT", Url = new Uri("https://opensource.org/licenses/MIT") }
+                });
+
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "Insert the JWT token in that way: Bearer {your token}",
+                    Name = "Authorization",
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        new string[] {}
+                    }
+                });
+            }
+                );
 
             services.AddScoped<IUnidadeTrabalho, UnidadeTrabalho>();
 
@@ -51,6 +92,8 @@ namespace LipeGames.Api.Configuration
             services.AddScoped<IJogoServico, JogoServico>();
 
             services.AddScoped<IAutenticacaoServico, AutenticacaoServico>();
+
+            services.AddSingleton<IValidator<Amigo>, AmigoValidator>();
 
             return services;
         }
