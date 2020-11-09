@@ -36,7 +36,9 @@ namespace LipeGames.Dominio.Servicos
         {
             var requisicaoacessoUsuario = await _signInManager.PasswordSignInAsync(usuarioLogin.Email, usuarioLogin.Senha, false, true);
 
-            if (!requisicaoacessoUsuario.Succeeded) throw new AutenticacaoExcecao("Usuário e/ou senha inválidos");
+            if (requisicaoacessoUsuario.IsLockedOut) throw new AutenticacaoExcecao("Acesso temporariamente bloqueado. Tente novamente em alguns instantes");
+
+            if (!requisicaoacessoUsuario.Succeeded) throw new AutenticacaoExcecao("Usuário e/ou senha inválidos");            
 
             return await GerarToken(usuarioLogin.Email);
         }
