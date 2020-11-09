@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using LipeGames.Api.Configuration;
 using LipeGames.Api.Filters;
 using Microsoft.AspNetCore.Builder;
@@ -5,6 +6,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using System;
 
 namespace LipeGames.Api
 {
@@ -21,7 +24,7 @@ namespace LipeGames.Api
         {
             services.AddControllers(options => {
                 options.Filters.Add(new HandleExceptionFilter());
-            });            
+            }).AddFluentValidation();
 
             services.AddApiConfiguration(Configuration);
 
