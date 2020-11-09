@@ -1,11 +1,8 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LipeGames.Dominio.Entidades.Validadores
 {
-    class AmigoValidator: AbstractValidator<Amigo>
+    public class AmigoValidator: AbstractValidator<Amigo>
     {
         public AmigoValidator()
         {
