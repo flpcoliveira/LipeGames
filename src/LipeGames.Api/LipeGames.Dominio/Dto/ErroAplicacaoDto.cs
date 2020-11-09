@@ -1,7 +1,11 @@
-﻿namespace LipeGames.Dominio.Dto
+﻿using System.Collections.Generic;
+
+namespace LipeGames.Dominio.Dto
 {
-    class ErroAplicacaoDto
+    public class ErroAplicacaoDto
     {
         public string Mensagem { get; set; }
+
+        public Dictionary<string, string> Erros { get; set; }
     }
 }

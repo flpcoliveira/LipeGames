@@ -1,4 +1,5 @@
 using LipeGames.Api.Configuration;
+using LipeGames.Api.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -18,9 +19,13 @@ namespace LipeGames.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();            
+            services.AddControllers(options => {
+                options.Filters.Add(new HandleExceptionFilter());
+            });            
 
             services.AddApiConfiguration(Configuration);
+
+            services.AddJwtConfiguration(Configuration);
         }
 
         

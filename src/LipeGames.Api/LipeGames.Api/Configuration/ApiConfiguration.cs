@@ -7,6 +7,7 @@ using LipeGames.Dominio.Servicos;
 using LipeGames.Infraestrutura.Dados.EFCore;
 using LipeGames.Infraestrutura.Dados.EFCore.Contexto;
 using LipeGames.Infraestrutura.Dados.EFCore.Repositorio;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,6 +23,12 @@ namespace LipeGames.Api.Configuration
             {
                 options.UseSqlServer(configuration.GetConnectionString("EmprestimoContexto"));
             });
+
+            services.AddDefaultIdentity<IdentityUser>()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<EmprestimoContexto>()
+                .AddDefaultTokenProviders();
+
 
             var mappingConfig = new MapperConfiguration(mc =>
             {
@@ -42,6 +49,8 @@ namespace LipeGames.Api.Configuration
             services.AddScoped<IJogoRepositorio, JogoRepositorio>();
 
             services.AddScoped<IJogoServico, JogoServico>();
+
+            services.AddScoped<IAutenticacaoServico, AutenticacaoServico>();
 
             return services;
         }

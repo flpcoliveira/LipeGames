@@ -1,62 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using LipeGames.Dominio.Dto.Autenticacao;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
+﻿using LipeGames.Dominio.Dto.Autenticacao;
+using LipeGames.Dominio.Interfaces.Servicos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace LipeGames.Api.Controllers
 {
 
-
-
+  
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class AutenticacaoController : ControllerBase
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly IAutenticacaoServico _servico;
 
-        public AutenticacaoController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
+        public AutenticacaoController(IAutenticacaoServico servico)
         {
-            _signInManager = signInManager;
-            _userManager = userManager;
+            _servico = servico;
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login(UsuarioLoginDto usuarioLogin)
         {
-            var result = await _signInManager.PasswordSignInAsync(usuarioLogin.Email, usuarioLogin.Senha, false, true);
-
-            if(result.Succeeded)
-            {
-                return Ok();
-            }
-            return BadRequest();
+            var result = await _servico.Login(usuarioLogin);
+            return Ok(result);
         }
 
         [HttpPost("registro")]
         public async Task<IActionResult> Registrar(UsuarioRegistroDto usuarioRegistro)
         {
-            var user = new IdentityUser
-            {
-                UserName = usuarioRegistro.Email,
-                Email = usuarioRegistro.Email,
-                EmailConfirmed = true
-            };
-
-            var result = await _userManager.CreateAsync(user);
-
-            if (result.Succeeded)
-            {
-                await _signInManager.SignInAsync(user, false);
-                return Ok();
-            }
-
-            return BadRequest();
+            var result = await _servico.Registrar(usuarioRegistro);
+            return Ok(result);
         }
-
     }
 }
