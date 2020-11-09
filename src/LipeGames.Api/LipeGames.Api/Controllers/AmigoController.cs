@@ -1,12 +1,10 @@
 ﻿using LipeGames.Dominio.Dto;
 using LipeGames.Dominio.Interfaces.Servicos;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace LipeGames.Api.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AmigoController : ControllerBase
