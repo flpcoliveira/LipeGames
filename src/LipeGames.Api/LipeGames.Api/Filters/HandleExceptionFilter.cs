@@ -2,6 +2,7 @@
 using LipeGames.Dominio.Excecoes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -16,7 +17,9 @@ namespace LipeGames.Api.Filters
 
             response.ContentType = "application/json";
 
-            var mensagem = "Ocorreu um erro interno. Favor entrar em contato com o nosso suporte";           
+            var mensagem = "Ocorreu um erro interno. Favor entrar em contato com o nosso suporte";
+
+            var mensagensValidacao = new Dictionary<string, string>();
 
             if (exception is EntidadeNaoEncotradaException)
             {
@@ -26,11 +29,15 @@ namespace LipeGames.Api.Filters
             {
                 response.StatusCode = (int)HttpStatusCode.BadRequest;
                 mensagem = exception.Message;
-            } 
+            } else if (exception is RegraNegocioExcecao)
+            {
+                mensagensValidacao = ((RegraNegocioExcecao)exception).Mensagens;
+            }
 
             var erroAplicacaoDto = new ErroAplicacaoDto
             {
-                Mensagem = mensagem
+                Resumo = mensagem,
+                Erros = mensagensValidacao
             };
             context.Result = new JsonResult(erroAplicacaoDto);
 
