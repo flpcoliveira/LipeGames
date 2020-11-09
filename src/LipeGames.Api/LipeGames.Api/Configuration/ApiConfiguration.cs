@@ -91,9 +91,15 @@ namespace LipeGames.Api.Configuration
 
             services.AddScoped<IJogoServico, JogoServico>();
 
+            services.AddScoped<IEmprestimoRepositorio, EmprestimoRepositorio>();
+
+            services.AddScoped<IEmprestimoServico, EmprestimoServico>();
+
             services.AddScoped<IAutenticacaoServico, AutenticacaoServico>();
 
             services.AddSingleton<IValidator<Amigo>, AmigoValidator>();
+
+            services.AddSingleton<IValidator<Emprestimo>, EmprestimoValidator>();
 
             return services;
         }
