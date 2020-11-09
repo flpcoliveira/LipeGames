@@ -4,7 +4,7 @@ namespace LipeGames.Dominio.Dto
 {
     public class ErroAplicacaoDto
     {
-        public string Mensagem { get; set; }
+        public string Resumo { get; set; }
 
         public Dictionary<string, string> Erros { get; set; }
     }
