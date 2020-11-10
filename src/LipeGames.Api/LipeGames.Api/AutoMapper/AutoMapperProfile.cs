@@ -19,6 +19,12 @@ namespace LipeGames.Api.AutoMapper
                 .ForMember(identity => identity.Email, opcoes => opcoes.MapFrom(dto => dto.Email))
                 .ForMember(identity => identity.UserName, opcoes => opcoes.MapFrom(dto => dto.Email))
                 .ForAllOtherMembers(opcoes => opcoes.Ignore());
+
+            CreateMap<Emprestimo, EmprestimoDto>()
+                .ReverseMap()
+                .ForMember(entidade => entidade.AmigoId, opcoes => opcoes.MapFrom(dto => dto.AmigoId))
+                .ForMember(entidade => entidade.JogoId, opcoes => opcoes.MapFrom(dto => dto.JogoId))
+                .ForAllOtherMembers(opcoes => opcoes.Ignore());
         }
     }
 }
