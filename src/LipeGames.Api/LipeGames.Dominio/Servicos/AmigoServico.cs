@@ -33,44 +33,39 @@ namespace LipeGames.Dominio.Servicos
 
         public async Task<AmigoDto> Alterar(int id, AmigoDto amigo)
         {
-            try
+            var entidade = await RecuperarEntidadePorId(id);
+
+            _mapper.Map(amigo, entidade);
+
+            var resultadoValidacao = await _validator.ValidateAsync(entidade);
+            if (!resultadoValidacao.IsValid)
             {
-                var entidade = await RecuperarEntidadePorId(id);
-
-                _mapper.Map(amigo, entidade);
-                await _validator.ValidateAndThrowAsync(entidade);
-
-                entidade = _repositorio.Alterar(entidade);
-                await _unidadeTrabalho.Commit();
-
-                amigo = _mapper.Map(entidade, amigo);
-                return amigo;
-
+                var errosValidacao = resultadoValidacao.Errors.ToDictionary(mensagem => mensagem.PropertyName, mensagem => mensagem.ErrorMessage);
+                throw new RegraNegocioExcecao("Foram encontrados erros de validacao no empréstimo", errosValidacao);
             }
-            catch (ValidationException e)
-            {
-                var erros = e.Errors.ToDictionary(mensagem => mensagem.PropertyName, mensagem => mensagem.ErrorMessage);
-                throw new RegraNegocioExcecao(MSG_ERRO_VALIDACAO, erros);
-            }
+
+            entidade = _repositorio.Alterar(entidade);
+            await _unidadeTrabalho.Commit();
+
+            amigo = _mapper.Map(entidade, amigo);
+            return amigo;
         }
 
         public async Task<AmigoDto> Criar(AmigoDto amigo)
         {
-            try
-            {
-                var entidade = _mapper.Map<Amigo>(amigo);
-                await _validator.ValidateAndThrowAsync(entidade);
+            var entidade = _mapper.Map<Amigo>(amigo);
 
-                entidade = await _repositorio.Criar(entidade);
-                await _unidadeTrabalho.Commit();
-
-                return _mapper.Map(entidade, amigo);
-            }
-            catch (ValidationException e)
+            var resultadoValidacao = await _validator.ValidateAsync(entidade);
+            if (!resultadoValidacao.IsValid)
             {
-                var erros = e.Errors.ToDictionary(mensagem => mensagem.PropertyName, mensagem => mensagem.ErrorMessage);
-                throw new RegraNegocioExcecao(MSG_ERRO_VALIDACAO, erros);
+                var errosValidacao = resultadoValidacao.Errors.ToDictionary(mensagem => mensagem.PropertyName, mensagem => mensagem.ErrorMessage);
+                throw new RegraNegocioExcecao("Foram encontrados erros de validacao no empréstimo", errosValidacao);
             }
+
+            entidade = await _repositorio.Criar(entidade);
+            await _unidadeTrabalho.Commit();
+
+            return _mapper.Map(entidade, amigo);
         }
 
         public async Task<AmigoDto> Detalhar(int id)
