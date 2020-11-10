@@ -17,26 +17,29 @@ namespace LipeGames.Api.Filters
 
             response.ContentType = "application/json";
 
-            var mensagem = "Ocorreu um erro interno. Favor entrar em contato com o nosso suporte";
+            response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            var resumo = "Ocorreu um erro interno. Favor entrar em contato com o nosso suporte";
 
             var mensagensValidacao = new Dictionary<string, string>();
 
             if (exception is EntidadeNaoEncotradaException)
             {
                 response.StatusCode = (int)HttpStatusCode.NotFound;
-                mensagem = exception.Message;
+                resumo = exception.Message;
             } else if (exception is AutenticacaoExcecao)
             {
                 response.StatusCode = (int)HttpStatusCode.BadRequest;
-                mensagem = exception.Message;
+                resumo = exception.Message;
             } else if (exception is RegraNegocioExcecao)
             {
+                response.StatusCode = (int)HttpStatusCode.BadRequest;
+                resumo = exception.Message;
                 mensagensValidacao = ((RegraNegocioExcecao)exception).Mensagens;
             }
 
             var erroAplicacaoDto = new ErroAplicacaoDto
             {
-                Resumo = mensagem,
+                Resumo = resumo,
                 Erros = mensagensValidacao
             };
             context.Result = new JsonResult(erroAplicacaoDto);
