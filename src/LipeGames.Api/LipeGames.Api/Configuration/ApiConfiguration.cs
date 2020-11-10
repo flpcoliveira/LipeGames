@@ -101,6 +101,8 @@ namespace LipeGames.Api.Configuration
 
             services.AddSingleton<IValidator<Emprestimo>, EmprestimoValidator>();
 
+            services.AddSingleton<IValidator<Jogo>, JogoValidator>();
+
             return services;
         }
     }
