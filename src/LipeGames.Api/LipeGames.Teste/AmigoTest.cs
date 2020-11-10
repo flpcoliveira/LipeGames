@@ -8,10 +8,12 @@ namespace LipeGames.Teste
         [Fact]
         public void Test_Create_Basic_Instance()
         {
-            var entidade = new Amigo { Id = 1, Nome = "João Santo Cristo" };
+            var idEsperado = 1;
+            var nomeEsperado = "João Santo Cristo";
+            var entidade = new Amigo { Id = 1, Nome = nomeEsperado };
 
-            Assert.Equal(1, entidade.Id);
-            Assert.Equal("João do Santo Cristo", entidade.Nome);
+            Assert.Equal(idEsperado, entidade.Id);
+            Assert.Equal(nomeEsperado, entidade.Nome);
 
         }
     }
