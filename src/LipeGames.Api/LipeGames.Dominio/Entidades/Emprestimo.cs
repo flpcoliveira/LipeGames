@@ -1,8 +1,5 @@
 ﻿using LipeGames.Dominio.Entidades.Abstracao;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace LipeGames.Dominio.Entidades
 {
@@ -19,10 +16,5 @@ namespace LipeGames.Dominio.Entidades
         public Amigo Amigo { get; set; }
 
         public Jogo Jogo { get; set; }
-
-        [NotMapped]
-        public bool Devolvido => DataDevolucao.HasValue;
-
-
     }
 }
