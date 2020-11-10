@@ -41,7 +41,7 @@ namespace LipeGames.Dominio.Servicos
             if (!resultadoValidacao.IsValid)
             {
                 var errosValidacao = resultadoValidacao.Errors.ToDictionary(mensagem => mensagem.PropertyName, mensagem => mensagem.ErrorMessage);
-                throw new RegraNegocioExcecao("Foram encontrados erros de validacao no empréstimo", errosValidacao);
+                throw new RegraNegocioExcecao(MSG_ERRO_VALIDACAO, errosValidacao);
             }
 
             entidade = _repositorio.Alterar(entidade);
@@ -59,7 +59,7 @@ namespace LipeGames.Dominio.Servicos
             if (!resultadoValidacao.IsValid)
             {
                 var errosValidacao = resultadoValidacao.Errors.ToDictionary(mensagem => mensagem.PropertyName, mensagem => mensagem.ErrorMessage);
-                throw new RegraNegocioExcecao("Foram encontrados erros de validacao no empréstimo", errosValidacao);
+                throw new RegraNegocioExcecao(MSG_ERRO_VALIDACAO, errosValidacao);
             }
 
             entidade = await _repositorio.Criar(entidade);
