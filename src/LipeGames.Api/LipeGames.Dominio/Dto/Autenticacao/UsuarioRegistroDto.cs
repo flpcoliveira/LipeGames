@@ -10,6 +10,6 @@ namespace LipeGames.Dominio.Dto.Autenticacao
 
         public string Senha { get; set; }
 
-        public string Confirmacao { get; set; }
+        public string ConfirmacaoSenha { get; set; }
     }
 }

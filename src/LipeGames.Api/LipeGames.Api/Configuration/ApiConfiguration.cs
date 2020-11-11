@@ -103,6 +103,8 @@ namespace LipeGames.Api.Configuration
 
             services.AddSingleton<IValidator<Jogo>, JogoValidator>();
 
+            services.AddSingleton<IValidator<Usuario>, UsuarioValidator>();
+
             return services;
         }
     }

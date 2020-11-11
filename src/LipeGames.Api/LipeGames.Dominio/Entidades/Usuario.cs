@@ -1,16 +1,23 @@
 ﻿using LipeGames.Dominio.Entidades.Abstracao;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LipeGames.Dominio.Entidades
 {
-    public class Usuario: EntidadeBase
+    public class Usuario : EntidadeBase
     {
-        public string Login { get; set; }
+        public string Email { get; set; }
 
-        public string Senha { private get; set; }
+        public string Senha { get; set; }
 
-        public DateTime UltimoAcesso { get; set; }
+        public string ConfirmacaoSenha { get; set; }
+
+        [NotMapped]
+        public bool ConfirmacaoSenhaIncorreta
+        {
+            get
+            {
+                return !Senha.Equals(ConfirmacaoSenha);
+            }
+        }
     }
 }

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace LipeGames.Api.AutoMapper
 {
-    public class AutoMapperProfile: Profile
+    public class AutoMapperProfile : Profile
     {
         public AutoMapperProfile()
         {
@@ -14,17 +14,29 @@ namespace LipeGames.Api.AutoMapper
 
             CreateMap<Jogo, JogoDto>().ReverseMap();
 
-            CreateMap<IdentityUser, UsuarioRegistroDto>()
-                .ReverseMap()
-                .ForMember(identity => identity.Email, opcoes => opcoes.MapFrom(dto => dto.Email))
-                .ForMember(identity => identity.UserName, opcoes => opcoes.MapFrom(dto => dto.Email))
-                .ForAllOtherMembers(opcoes => opcoes.Ignore());
-
             CreateMap<Emprestimo, EmprestimoDto>()
                 .ReverseMap()
-                .ForMember(entidade => entidade.AmigoId, opcoes => opcoes.MapFrom(dto => dto.AmigoId))
-                .ForMember(entidade => entidade.JogoId, opcoes => opcoes.MapFrom(dto => dto.JogoId))
+                .ForMember(emprestimo => emprestimo.AmigoId, opcoes => opcoes.MapFrom(dto => dto.AmigoId))
+                .ForMember(emprestimo => emprestimo.JogoId, opcoes => opcoes.MapFrom(dto => dto.JogoId))
                 .ForAllOtherMembers(opcoes => opcoes.Ignore());
+
+            CreateMap<Usuario, UsuarioLoginDto>()
+                .ReverseMap()
+                .ForMember(entidade => entidade.Email, opcoes => opcoes.MapFrom(dto => dto.Email))
+                .ForMember(entidade => entidade.Senha, opcoes => opcoes.MapFrom(dto => dto.Senha))
+                .ForAllOtherMembers(opcoes => opcoes.Ignore());
+
+
+            CreateMap<Usuario, UsuarioRegistroDto>()
+                    .ReverseMap()
+                    .ForMember(usuario => usuario.Email, opcoes => opcoes.MapFrom(dto => dto.Email))
+                    .ForMember(usuario => usuario.Senha, opcoes => opcoes.MapFrom(dto => dto.Senha))
+                    .ForMember(usuario => usuario.ConfirmacaoSenha, opcoes => opcoes.MapFrom(dto => dto.ConfirmacaoSenha));
+
+            CreateMap<Usuario, IdentityUser>()
+                .ForMember(usuarioAutenticacao => usuarioAutenticacao.Email, opcoes => opcoes.MapFrom(entidade => entidade.Email))
+                .ForMember(usuarioAutenticacao => usuarioAutenticacao.UserName, opcoes => opcoes.MapFrom(entidade => entidade.Email));
         }
+
     }
 }
